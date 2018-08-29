@@ -17,7 +17,6 @@
         "packages/ffe-tabs/less"
     ],
     "destination": "dist/markup",
-    "css": [
-        "../ffe.css"
-    ]
+    "css": ["../ffe.css"],
+    "builder": "src/kss-template"
 }
