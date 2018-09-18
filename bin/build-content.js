@@ -7,6 +7,24 @@ const Handlebars = require('handlebars');
 
 const settings = require('../styleguide.content.js');
 
+const markedRenderer = new marked.Renderer();
+
+markedRenderer.heading = (text, level, raw) => {
+    const tag = `h${level}`;
+    const { options } = markedRenderer;
+
+    if (options.headerIds) {
+        return `<${tag}
+            class="ffe-${tag}"
+            id="${options.headerPrefix}${raw
+            .toLowerCase()
+            .replace(/[^\w]+/g, '-')}">
+            ${text}</${tag}>\n`;
+    }
+    // ignore IDs
+    return `<${tag}>${text}</${tag}>\n`;
+};
+
 const promisedMap = (arr, cb) => Promise.all(arr.map(cb));
 
 const resolveDir = dir => path.normalize(path.join(__dirname, '..', dir));
@@ -31,7 +49,6 @@ const dataToFileInDirWriter = dir => fname =>
 
 const createWriter = relDir => dataToFileInDirWriter(resolveDir(relDir));
 
-
 const readFromBaseDir = createReader('.');
 
 const readFromContentDir = createReader(settings.contentDir);
@@ -45,7 +62,9 @@ const prerenderSections = sectionsDef => {
     const parseSections = nodes =>
         promisedMap(nodes, ({ name, content, sections = [] }) =>
             Promise.all([
-                readFromContentDir(content).then(md => marked(md)),
+                readFromContentDir(content).then(md =>
+                    marked(md, { renderer: markedRenderer }),
+                ),
                 parseSections(sections),
             ]).then(([html, parsedSections]) => ({
                 name,
@@ -68,7 +87,7 @@ const getFrontpageCompiler = fname =>
     readFromBaseDir(fname)
         .then(template => Handlebars.compile(template))
         .then(compile => opts =>
-            Promise.resolve(compile(opts)).then(writeToOutputDir('index.html'))
+            Promise.resolve(compile(opts)).then(writeToOutputDir('index.html')),
         );
 
 const getStyleguidistCompiler = (source, destination) =>
@@ -88,25 +107,24 @@ const registerPartials = partialsDef =>
     );
 
 Promise.all([
-        prerenderSections(settings.sections),
-        getTemplateCompiler(
-            settings.template
-        ),
-        getFrontpageCompiler(settings.frontpage),
-        getStyleguidistCompiler(
-            settings.styleguidistTemplate,
-            settings.styleguidistDest,
-        ),
-        registerPartials(settings.partials),
-        mkdir(settings.outputDir),
+    prerenderSections(settings.sections),
+    getTemplateCompiler(settings.template),
+    getFrontpageCompiler(settings.frontpage),
+    getStyleguidistCompiler(
+        settings.styleguidistTemplate,
+        settings.styleguidistDest,
+    ),
+    registerPartials(settings.partials),
+    mkdir(settings.outputDir),
 ])
     .then(([sections, compile, compileFrontpage, compileStyleguidist]) =>
         Promise.all([
-            promisedMap(sections, section => compile({
+            promisedMap(sections, section =>
+                compile({
                     ...settings.context,
                     sections,
                     section,
-                }).then(writeToOutputDir(`${section.target}.html`))
+                }).then(writeToOutputDir(`${section.target}.html`)),
             ),
             compileFrontpage({
                 ...settings.context,
@@ -116,6 +134,6 @@ Promise.all([
                 ...settings.context,
                 sections,
             }),
-        ])
+        ]),
     )
     .catch(err => console.error(err));
