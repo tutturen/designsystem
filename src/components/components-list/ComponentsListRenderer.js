@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Link from 'rsg-components/Link';
-import getUrl from 'react-styleguidist/lib/utils/getUrl';
 
-export function ComponentsListRenderer({ items, useIsolatedLinks = false }) {
-    items = items.filter(item => item.name);
+export function ComponentsListRenderer({ items }) {
+    items = items.filter(item => item.visibleName);
 
     if (!items.length) {
         return null;
@@ -13,49 +12,40 @@ export function ComponentsListRenderer({ items, useIsolatedLinks = false }) {
 
     return (
         <ul className="sb1ds-components-list">
-            {items.map(({ heading, name, slug, content }) => {
-                const href = getUrl({
-                    name,
-                    slug,
-                    anchor: !useIsolatedLinks,
-                    isolated: useIsolatedLinks,
-                });
-
-                return (
-                    <li
-                        className={classNames('sb1ds-components-list__item', {
-                            'sb1ds-components-list__item--heading': heading,
-                        })}
-                        key={name}
+            {items.map(({ heading, visibleName, href, content, external }) => (
+                <li
+                    className={classNames('sb1ds-components-list__item', {
+                        'sb1ds-components-list__item--heading': heading,
+                    })}
+                    key={href}
+                >
+                    <Link
+                        noUnderline={true}
+                        className={classNames(
+                            'sb1ds-components-list__link',
+                            {
+                                'sb1ds-components-list__link--heading': heading,
+                            },
+                            {
+                                'sb1ds-components-list__link--active':
+                                    href ===
+                                    `/${decodeURI(window.location.hash)}`,
+                            },
+                        )}
+                        href={href}
+                        target={external ? '_blank' : undefined}
                     >
-                        <Link
-                            noUnderline={true}
-                            className={classNames(
-                                'sb1ds-components-list__link',
-                                {
-                                    'sb1ds-components-list__link--heading': heading,
-                                },
-                                {
-                                    'sb1ds-components-list__link--active':
-                                        href ===
-                                        `/${decodeURI(window.location.hash)}`,
-                                },
-                            )}
-                            href={href}
-                        >
-                            {name}
-                        </Link>
-                        {content}
-                    </li>
-                );
-            })}
+                        {visibleName}
+                    </Link>
+                    {content}
+                </li>
+            ))}
         </ul>
     );
 }
 
 ComponentsListRenderer.propTypes = {
     items: PropTypes.array.isRequired,
-    useIsolatedLinks: PropTypes.bool.isRequired,
 };
 
 export default ComponentsListRenderer;

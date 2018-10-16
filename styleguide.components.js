@@ -9,7 +9,10 @@ module.exports = {
         __dirname,
         'src/components/table-of-contents',
     ),
-    ComponentsList: path.join(__dirname, 'src/components/components-list'),
+    ComponentsListRenderer: path.join(
+        __dirname,
+        'src/components/components-list',
+    ),
     Heading: path.join(__dirname, 'src/components/heading'),
     Link: path.join(__dirname, 'src/components/link'),
     SectionRenderer: path.join(__dirname, 'src/components/section'),
