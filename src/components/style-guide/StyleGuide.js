@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { bool, node, shape, string } from 'prop-types';
 
 import Sidebar from '../sidebar';
-import { Grid, GridRow, GridCol } from '../../../packages/ffe-grid-react';
+import { InlineGrid, GridRow, GridCol } from '../../../packages/ffe-grid-react';
 
 class StyleGuide extends Component {
     componentDidUpdate(prevProps) {
@@ -18,12 +18,12 @@ class StyleGuide extends Component {
 
         return (
             <Fragment>
-                <Grid topPadding={false} className="sb1ds">
+                <InlineGrid className="sb1ds">
                     <GridRow>
-                        <GridCol lg={3} md={4} sm={12} bottomPadding={false}>
+                        <GridCol lg={3} md={4} sm={12}>
                             <Sidebar toc={toc} title={title} />
                         </GridCol>
-                        <GridCol lg={9} md={8} sm={12} bottomPadding={false}>
+                        <GridCol lg={9} md={8} sm={12}>
                             <main className="sb1ds-main">
                                 <h1 className="ffe-h1 sb1ds-intro__heading">
                                     Komponenter
@@ -39,7 +39,7 @@ class StyleGuide extends Component {
                             </main>
                         </GridCol>
                     </GridRow>
-                </Grid>
+                </InlineGrid>
             </Fragment>
         );
     }
