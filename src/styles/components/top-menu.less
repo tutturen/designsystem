@@ -7,11 +7,11 @@
 
     &__logo {
         height: 30px;
-        margin: 10px 0;
+        margin: @ffe-spacing-xs 0;
         vertical-align: middle;
 
         @media screen and (min-width: @breakpoint-md) {
-            margin: 10px 20px;
+            margin: @ffe-spacing-sm 0;
         }
 
         @media screen and (min-width: @breakpoint-xl) {
@@ -34,7 +34,7 @@
     &__link {
         display: inline-block;
         height: 100%;
-        padding: 5px 10px;
+        padding: @ffe-spacing-xs;
         color: @ffe-grey-charcoal;
         position: relative;
         white-space: nowrap;
@@ -45,11 +45,11 @@
         }
 
         @media screen and (min-width: @breakpoint-lg) {
-            padding: 0 15px;
+            padding: 0 @ffe-spacing-md;
         }
 
         @media screen and (min-width: @breakpoint-xl) {
-            padding: 0 20px;
+            padding: 0 @ffe-spacing-lg;
         }
 
         &::before {
@@ -60,16 +60,16 @@
                 background: @ffe-blue-royal;
                 position: absolute;
                 top: 0;
-                left: 15px;
-                right: 15px;
+                left: @ffe-spacing-md;
+                right: @ffe-spacing-md;
                 transform: translateY(-10px);
                 transition: transform @ffe-transition-duration
                     @ffe-ease-in-out-back;
             }
 
             @media screen and (min-width: @breakpoint-xl) {
-                left: 20px;
-                right: 20px;
+                left: @ffe-spacing-lg;
+                right: @ffe-spacing-lg;
             }
         }
 
@@ -117,11 +117,15 @@
 
     &__toggle-button {
         position: absolute;
-        top: 12px;
-        right: 10px;
+        top: 0;
+        right: 0;
 
         &::after {
             border: none;
+        }
+
+        @media screen and (min-width: @breakpoint-md) {
+            top: 3px;
         }
 
         @media screen and (min-width: @breakpoint-lg) {
