@@ -1,5 +1,5 @@
 {
-    "extends": ["./linting/eslint-config-ffe/index.js", "prettier"],
+    "extends": "./linting/eslint-config-ffe/index.js",
     "parser": "babel-eslint",
     "overrides": [
         {

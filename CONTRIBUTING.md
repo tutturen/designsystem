@@ -131,12 +131,6 @@ Vi prøver å holde koden på samme nivå på tvers av dette monorepoet. Dette h
 samt å bruke mindre tid på code reviews. Denne seksjonen forklarer litt om de forskjellige tekniske valgene vi bruker
 på tvers av pakkene våre.
 
-#### Formatering
-
-Vi bruker [prettier](https://prettier.io) til formatere koden vår (både JS og LESS). Det kjøres enten i editoren din
-eller manuelt på stagede endringer med `npm run prettier`. Du kan sette opp `prettier` til
-å [kjøre i editoren din slik](https://prettier.io/docs/en/editors.html).
-
 #### LESS
 
 All stylingkode blir skrevet i [LESS](http://lesscss.org/). LESS er et supersett av CSS, som gir oss endel
