@@ -33,7 +33,7 @@
     "@sb1/ffe-grid": "^10.1.5",
     "@sb1/ffe-grid-react": "^9.1.4",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-adapter-react-16": "^1.11.0",
     "jest": "^23.4.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
