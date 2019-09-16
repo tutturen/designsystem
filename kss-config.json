@@ -14,10 +14,9 @@
         "packages/ffe-spinner/less",
         "packages/ffe-system-message/less",
         "packages/ffe-tables/less",
-        "packages/ffe-tabs/less"
+        "packages/ffe-tabs/less",
+        "packages/ffe-timeline-list/less"
     ],
     "destination": "dist/markup",
-    "css": [
-        "../ffe.css"
-    ]
+    "css": ["../ffe.css"]
 }

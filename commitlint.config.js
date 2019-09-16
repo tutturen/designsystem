@@ -55,6 +55,7 @@ module.exports = {
                 'ffe-tables-react',
                 'ffe-tabs',
                 'ffe-tabs-react',
+                'ffe-timeline-list',
                 'ffe-webfonts',
             ],
         ],
