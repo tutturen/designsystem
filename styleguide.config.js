@@ -465,5 +465,15 @@ module.exports = {
                 },
             ],
         },
+        {
+            name: 'Tidslinje',
+            sections: [
+                {
+                    name: 'Tidslinjeliste',
+                    components:
+                        'packages/ffe-timeline-list-react/src/[A-Z]+([A-Za-z]).js',
+                },
+            ],
+        },
     ],
 };
