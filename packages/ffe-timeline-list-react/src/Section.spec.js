@@ -9,7 +9,13 @@ describe('Section', () => {
 
         beforeAll(() => {
             comp = shallow(
-                <Section title="ThisSection" details={['abc', 'def']} />,
+                <Section
+                    title="This Section"
+                    details={[
+                        'abc',
+                        <em>def</em>, //eslint-disable-line react/jsx-key
+                    ]}
+                />,
             );
         });
 
@@ -33,7 +39,7 @@ describe('Section', () => {
                     headerItems
                         .filter('.ffe-timeline-list__header-item--time')
                         .text(),
-                ).toBe('ThisSection'));
+                ).toBe('This Section'));
 
             it('contains two elements with details', () =>
                 expect(
@@ -41,6 +47,24 @@ describe('Section', () => {
                         '.ffe-timeline-list__header-item--detail',
                     ).length,
                 ).toBe(2));
+
+            it('contains details given as string', () =>
+                expect(
+                    headerItems
+                        .filter('.ffe-timeline-list__header-item--detail')
+                        .at(0)
+                        .text(),
+                ).toBe('abc'));
+
+            it('contains details given as dom node', () =>
+                expect(
+                    headerItems
+                        .filter('.ffe-timeline-list__header-item--detail')
+                        .at(1)
+                        .children()
+                        .first()
+                        .type(),
+                ).toBe('em'));
         });
     });
 });

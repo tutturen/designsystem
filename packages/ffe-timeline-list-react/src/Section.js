@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, arrayOf } from 'prop-types';
+import { string, node, arrayOf, oneOf } from 'prop-types';
 import uuid from 'uuid';
 import ChevronIkon from '@sb1/ffe-icons-react/lib/chevron-ikon';
 
@@ -28,7 +28,7 @@ export default function Section({ title, details }) {
 
 Section.propTypes = {
     title: string.isRequired,
-    details: arrayOf(string),
+    details: arrayOf(oneOf([string, node])),
 };
 Section.defaultProps = {
     details: [],
