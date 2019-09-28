@@ -44,7 +44,7 @@
   },
   "peerDependencies": {
     "@sb1/ffe-message-box": "^6.0.0",
-    "react": "^16.9.0"
+    "react": "^16.10.1"
   },
   "publishConfig": {
     "access": "public"
