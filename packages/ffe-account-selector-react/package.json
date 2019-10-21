@@ -50,7 +50,7 @@
   },
   "peerDependencies": {
     "@sb1/ffe-form": ">=11.0.1",
-    "@sb1/ffe-spinner": "^3.0.0",
+    "@sb1/ffe-spinner": "^3.0.27",
     "react": "^16.9.0"
   },
   "publishConfig": {
