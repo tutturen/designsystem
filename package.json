@@ -52,7 +52,7 @@
         "coveralls": "^3.0.2",
         "cross-env": "^5.2.0",
         "css-loader": "^1.0.0",
-        "enzyme": "^3.7.0",
+        "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.7.0",
         "eslint": "^5.9.0",
         "eslint-config-prettier": "^4.1.0",
