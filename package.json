@@ -81,7 +81,7 @@
         "replace": "^1.1.1",
         "rimraf": "^2.6.2",
         "style-loader": "^0.23.0",
-        "stylelint-config-prettier": "^5.0.0",
+        "stylelint-config-prettier": "^8.0.1",
         "webpack": "^4.25.1"
     },
     "husky": {
