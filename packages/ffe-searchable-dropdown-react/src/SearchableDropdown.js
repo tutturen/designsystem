@@ -81,16 +81,30 @@ const SearchableDropdown = ({
                 openMenu,
                 closeMenu,
                 clearSelection,
+                toggleMenu,
             }) => {
-                const dropdownListFiltered = filterDropdownList(
-                    dropdownList,
-                    searchAttributes,
-                    inputValue,
-                ).slice(0, maxRenderedDropdownElements);
+                const trimmedInput = inputValue.trim();
+
+                const shouldFilter =
+                    !!trimmedInput.length && trimmedInput !== selectedItem;
+                const dropdownListFiltered = shouldFilter
+                    ? filterDropdownList(
+                          dropdownList,
+                          searchAttributes,
+                          trimmedInput,
+                      ).slice(0, maxRenderedDropdownElements)
+                    : dropdownList.slice(0, maxRenderedDropdownElements);
 
                 const listToRender = dropdownListFiltered.length
                     ? dropdownListFiltered
                     : noMatch.dropdownList || [];
+
+                const {
+                    onFocus = Function.prototype,
+                    onBlur = Function.prototype,
+                    onClick = Function.prototype,
+                    ...restInputProps
+                } = inputProps;
 
                 return (
                     <div
@@ -108,12 +122,30 @@ const SearchableDropdown = ({
                                 className: classNames('ffe-input-field', {
                                     'ffe-input-field--dark': dark,
                                 }),
-                                ...inputProps,
+                                onFocus: (...args) => {
+                                    if (!isOpen) {
+                                        toggleMenu();
+                                    }
+                                    onFocus(...args);
+                                },
+                                onBlur: (...args) => {
+                                    if (isOpen) {
+                                        toggleMenu();
+                                    }
+                                    onBlur(...args);
+                                },
+                                onClick: (...args) => {
+                                    if (!isOpen) {
+                                        toggleMenu();
+                                    }
+                                    onClick(...args);
+                                },
+                                ...restInputProps,
                             })}
                             aria-invalid={
                                 typeof ariaInvalid === 'string'
                                     ? ariaInvalid
-                                    : String(ariaInvalid)
+                                    : String(!!ariaInvalid)
                             }
                         />
                         {selectedItem ? (
